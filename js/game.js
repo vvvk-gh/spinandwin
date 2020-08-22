@@ -59,8 +59,18 @@ function create() {
     this.wheel.setPosition(W/2 , (H/2)-15);
     this.wheel.setScale(0.15);
     
-    //event listener
+    //fontStyle for text
+    font_Style ={
+        font:"bold 20px Cursive",
+        color : "black",
+        align : "center"
+    }
 
+    //create text on screen
+    this.game_text = this.add.text(10 , 10 , "Welcome to Spin & Win" , font_Style)
+
+    //mouse event listener parameters : (listnername , func name , context)
+    this.input.on('pointerdown' ,spinWheel , this)
 }
 
 //Game Loop
@@ -75,4 +85,9 @@ this.wheel.angle += 1;
 
     //Disapper the wheel using alpha
     //this.wheel.alpha -=0.01; 
+}
+
+function spinWheel(){
+    console.log(`Mouse clicked`)
+    this.game_text.setText("Mouse clicked")
 }
