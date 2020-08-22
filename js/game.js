@@ -1,4 +1,6 @@
 //config
+//import {Phaser} from "phaser";
+
 let config = {
     type : Phaser.CANVAS,
     width : 700,
@@ -75,7 +77,8 @@ function create() {
 
 //Game Loop
 function update() {
-//change angle
+console.log(`update`)
+    //change angle
 this.wheel.angle += 1; 
 
     //additional functions
@@ -88,6 +91,6 @@ this.wheel.angle += 1;
 }
 
 function spinWheel(){
-    console.log(`Mouse clicked`)
+    //console.log(`Mouse clicked`)
     this.game_text.setText("Mouse clicked")
 }
