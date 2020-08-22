@@ -78,8 +78,9 @@ function create() {
 //Game Loop
 function update() {
 console.log(`update`)
-    //change angle
-this.wheel.angle += 1; 
+
+//change angle
+//this.wheel.angle += 1; 
 
     //additional functions
     // Zoom in the wheel 0.01x where time update gets called
@@ -93,4 +94,15 @@ this.wheel.angle += 1;
 function spinWheel(){
     //console.log(`Mouse clicked`)
     this.game_text.setText("Mouse clicked")
+
+    //tweens =Animations 
+    tween = this.tweens.add({
+        targets : this.wheel,
+        angle:800,  // 1 full circle takes 360 degress
+        ease :"Cubic.easeOut",
+        duration: 3000,
+        onComplete : function () {
+            alert("You Won Something");
+        } 
+    })
 }
