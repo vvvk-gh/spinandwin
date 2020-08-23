@@ -28,6 +28,7 @@ function preload() {
     this.load.image('wheel' , '../assets/wheel.png')
     this.load.image('stand' , '../assets/stand.png')
     this.load.image('pin' , '../assets/pin.png')
+
 }
 
 function create() {
@@ -92,17 +93,26 @@ console.log(`update`)
 }
 
 function spinWheel(){
+
     //console.log(`Mouse clicked`)
     this.game_text.setText("Mouse clicked")
 
+    //creating rounds randomly
+    let rounds = Phaser.Math.Between(2,4) //creates an number between 2 to 5
+
+    // as wheel has 12 parts so each part will be consuming an angle of 360/12 = 30 
+    let angle = Phaser.Math.Between(0,11)*30 
+    
+    let total_angle = rounds*360 + angle
+    
     //tweens =Animations 
     tween = this.tweens.add({
         targets : this.wheel,
-        angle:800,  // 1 full circle takes 360 degress
+        angle: total_angle,
         ease :"Cubic.easeOut",
-        duration: 3000,
+        duration: 6000,
         onComplete : function () {
-            alert("You Won Something");
+            //alert("You Won Something");
         } 
     })
 }
