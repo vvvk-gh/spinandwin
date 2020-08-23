@@ -102,8 +102,25 @@ console.log(`update`)
 }
 
 function spinWheel(){
+ 
+ let offers = {
+     0 : "CB Book",
+     1: "CB T-shirt",
+     2 : "2 Extra spins",
+     3 : "Amazon Voucher",
+     4 : "50% OFF",
+     5:  "Netflix Sub",
+     6 : "100% OFF",
+     8 : "70% OFF",
+     7 : "CB Swag pack",
+     9:  "sad , Please try later",
+     10 :"35% off",
+     11: "3000 CB credits",
+    }
+ 
+ 
     //console.log(`Mouse clicked`)
-    this.game_text.setText("Mouse clicked")
+    this.game_text.setText("Loading...")
 
    //play audio
     this.wheel_music.play();
@@ -113,9 +130,9 @@ function spinWheel(){
     let rounds = Phaser.Math.Between(2,4) //creates an number between 2 to 5
 
     // as wheel has 12 parts so each part will be consuming an angle of 360/12 = 30 
-    let angle = Phaser.Math.Between(0,11)*30 
+    this.angle = Phaser.Math.Between(0,11)*30 
     
-    let total_angle = rounds*360 + angle
+    let total_angle = rounds*360 + this.angle
     console.log(`${total_angle}`)
    
     //tweens =Animations 
@@ -125,7 +142,8 @@ function spinWheel(){
         ease :"Cubic.easeOut",
         duration: 6000,
         onComplete : ( ) => {
-            this.wheel_music.pause('spinmuzic')
+            this.wheel_music.pause('spinmuzic');
+            this.game_text.setText('You Won : ' + offers[this.angle/30])
         } 
     })
 }
