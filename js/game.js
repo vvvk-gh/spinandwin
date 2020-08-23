@@ -20,7 +20,7 @@ function preload() {
    
    
     //this returns its current object : scence and shows all the available objects/functions
-    console.log(this);
+    //console.log(this);
     
     //load images
     //parameters : (name , url)
@@ -29,7 +29,12 @@ function preload() {
     this.load.image('stand' , '../assets/stand.png')
     this.load.image('pin' , '../assets/pin.png')
 
+    // load audio
+    this.load.audio('spinmuzic','../assets/bgm.mp3')
+
 }
+
+//var wheel_music;
 
 function create() {
     let W = game.config.width;
@@ -74,6 +79,10 @@ function create() {
 
     //mouse event listener parameters : (listnername , func name , context)
     this.input.on('pointerdown' ,spinWheel , this)
+
+    //creating audio / add audio 
+    this.wheel_music = this.sound.add('spinmuzic')
+    
 }
 
 //Game Loop
@@ -93,9 +102,12 @@ console.log(`update`)
 }
 
 function spinWheel(){
-
     //console.log(`Mouse clicked`)
     this.game_text.setText("Mouse clicked")
+
+   //play audio
+    this.wheel_music.play();
+
 
     //creating rounds randomly
     let rounds = Phaser.Math.Between(2,4) //creates an number between 2 to 5
@@ -104,15 +116,16 @@ function spinWheel(){
     let angle = Phaser.Math.Between(0,11)*30 
     
     let total_angle = rounds*360 + angle
-    
+    console.log(`${total_angle}`)
+   
     //tweens =Animations 
     tween = this.tweens.add({
         targets : this.wheel,
         angle: total_angle,
         ease :"Cubic.easeOut",
         duration: 6000,
-        onComplete : function () {
-            //alert("You Won Something");
+        onComplete : ( ) => {
+            this.wheel_music.pause('spinmuzic')
         } 
     })
 }
