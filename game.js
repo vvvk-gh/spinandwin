@@ -24,10 +24,10 @@ function preload() {
     
     //load images
     //parameters : (name , url)
-    this.load.image('bg' ,'../assets/bg.jpg')
-    this.load.image('wheel' , '../assets/wheel.png')
-    this.load.image('stand' , '../assets/stand.png')
-    this.load.image('pin' , '../assets/pin.png')
+    this.load.image('bg' ,'assets/bg.jpg')
+    this.load.image('wheel' , 'assets/wheel.png')
+    this.load.image('stand' , 'assets/stand.png')
+    this.load.image('pin' , 'assets/pin.png')
 
     // load audio
     this.load.audio('spinmuzic','../assets/bgm.mp3')
