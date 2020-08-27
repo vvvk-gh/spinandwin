@@ -30,7 +30,7 @@ function preload() {
     this.load.image('pin' , 'assets/pin.png')
 
     // load audio
-    this.load.audio('spinmuzic','../assets/bgm.mp3')
+    this.load.audio('spinmuzic','assets/bgm.mp3')
 
 }
 
