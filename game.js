@@ -168,11 +168,13 @@ function spinWheel(){
     })
  }
      
- function checkSpinStatus(t){
 
+ function checkSpinStatus(t){
     if(is_Spining){
+        //hide button
         t.button.alpha = 0;
     }else{
+        //show button
         t.button.alpha = 1;
     }
 }
