@@ -13,6 +13,7 @@ let config = {
     }
 }
 
+let is_Spining = false;
 
 let game = new Phaser.Game(config)
 
@@ -24,22 +25,32 @@ function preload() {
     
     //load images
     //parameters : (name , url)
-    this.load.image('bg' ,'assets/bg.jpg')
-    this.load.image('wheel' , 'assets/wheel.png')
-    this.load.image('stand' , 'assets/stand.png')
-    this.load.image('pin' , 'assets/pin.png')
-
+    this.load.image('bg','assets/bg.jpg')
+    this.load.image('wheel','assets/wheel.png')
+    this.load.image('wheel2','assets/wheel2.png')
+    this.load.image('stand','assets/stand.png')
+    this.load.image('pin', 'assets/pin.png')
+    this.load.image('button', 'assets/button.png');
     // load audio
     this.load.audio('spinmuzic','assets/bgm.mp3')
 
 }
 
-//var wheel_music;
+//var wheel_music
 
 function create() {
     let W = game.config.width;
     let H = game.config.height;
     
+   //button 
+    //button.onInputOut.add(out, this);
+    this.button = this.add.sprite((W/2)-250,W/2,'button')
+    this.button.depth = 1;
+    this.button.setScale(0.25)
+    //accepts all the input actions on the button/image
+    this.button.setInteractive();
+    this.button.on('pointerdown', spinWheel , this);
+
     //create background
     //sprite is same as image and by default x,y axis gets the image from the center as the starting point of the image
     let background = this.add.sprite(0,0,'bg');
@@ -77,8 +88,9 @@ function create() {
     //create text on screen
     this.game_text = this.add.text(10 , 10 , "Welcome to Spin & Win" , font_Style)
 
+    
     //mouse event listener parameters : (listnername , func name , context)
-    this.input.on('pointerdown' ,spinWheel , this)
+    //this.input.on('pointerdown' ,spinWheel , this)
 
     //creating audio / add audio 
     this.wheel_music = this.sound.add('spinmuzic')
@@ -99,10 +111,14 @@ console.log(`update`)
 
     //Disapper the wheel using alpha
     //this.wheel.alpha -=0.01; 
+
+    
 }
 
 function spinWheel(){
- 
+    
+    is_Spining = true;
+
  let offers = {
      0 : "CB Book",
      1: "CB T-shirt",
@@ -118,7 +134,7 @@ function spinWheel(){
      11: "3000 CB credits",
     }
  
- 
+
     //console.log(`Mouse clicked`)
     this.game_text.setText("Loading...")
 
@@ -144,6 +160,8 @@ function spinWheel(){
         onComplete : ( ) => {
             this.wheel_music.pause('spinmuzic');
             this.game_text.setText('You Won : ' + offers[this.angle/30])
+            is_Spining = false;
         } 
     })
-}
+ }
+     
