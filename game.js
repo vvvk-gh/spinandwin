@@ -112,6 +112,8 @@ console.log(`update`)
     //Disapper the wheel using alpha
     //this.wheel.alpha -=0.01; 
 
+    //Spining wheel only if the is_spin is true
+    checkSpinStatus(this)
     
 }
 
@@ -158,10 +160,19 @@ function spinWheel(){
         ease :"Cubic.easeOut",
         duration: 6000,
         onComplete : ( ) => {
+            is_Spining = false;
             this.wheel_music.pause('spinmuzic');
             this.game_text.setText('You Won : ' + offers[this.angle/30])
-            is_Spining = false;
+            
         } 
     })
  }
      
+ function checkSpinStatus(t){
+
+    if(is_Spining){
+        t.button.alpha = 0;
+    }else{
+        t.button.alpha = 1;
+    }
+}
